@@ -54,7 +54,7 @@ fn main() {
                         message.content);
                 if message.content.starts_with("!random")
                         || message.content.starts_with("!roll") {
-                    let rand = rand::thread_rng().gen_range(1, 1001);
+                    let rand = rand::thread_rng().gen_range(0, 1001);
                     let out = format!("🎲 - {} rolled: {}",
                             message.author.name,
                             rand);
