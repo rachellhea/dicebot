@@ -4,11 +4,23 @@ use discord::Discord;
 use rand::Rng;
 use std::env;
 
+fn get_bot_id() -> UserId {
+    let bot_id = &env::var("DISCORD_USER_ID").expect("Expected bot user ID");
+
+    UserId(bot_id.parse::<u64>().unwrap())
+}
+
+fn get_admin_id() -> UserId {
+    let admin_id = &env::var("DISCORD_ADMIN_ID").expect("Expected bot admin ID");
+
+    UserId(admin_id.parse::<u64>().unwrap())
+}
+
 fn main() {
     // Log into Discord using the bot token.
     let token = &env::var("DISCORD_TOKEN").expect("Expected token");
-    let bot_id = &env::var("DISCORD_USER_ID").expect("Expected bot user ID");
-    let bot_id = UserId(bot_id.parse::<u64>().unwrap());
+    let bot_id = get_bot_id();
+    let admin_id = get_admin_id();
 
     let discord = Discord::from_bot_token(token).expect("login failed");
     let (mut connection, _) = discord.connect().expect("connect failed");
@@ -38,7 +50,8 @@ fn main() {
                             &out,
                             "",
                             false);
-                } else if message.content == "!quit" {
+                } else if message.content == "!quit"
+                        && message.author.id == admin_id {
                     println!("Quitting...");
                     break;
                 }
