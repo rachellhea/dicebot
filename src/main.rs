@@ -18,6 +18,12 @@ from each player while the 1000 will give a truth or dare to each player.
 If the same player loses two rounds in a row, both them and the \
 next lowest roll will take a truth or dare chosen by the two time loser.";
 
+const HELP: &'static str = "📝💁🏻‍♀️ ***__Command List__*** 💁🏻‍♀️📝
+
+`!random`/`!roll` - Roll a dice, from 0 to 1000!
+`!rules` - Display the rules of the dice game!
+`!help`/`!commands`/`!guide` - Get this nifty help text!";
+
 fn get_bot_id() -> UserId {
     let bot_id = &env::var("DISCORD_USER_ID").expect("Expected bot user ID");
 
@@ -67,6 +73,13 @@ fn main() {
                 } else if message.content.starts_with("!rules") {
                     let _ = discord.send_message(message.channel_id,
                             &RULES,
+                            "",
+                            false);
+                } else if message.content.starts_with("!help")
+                        || message.content.starts_with("!commands")
+                        || message.content.starts_with("!guide") {
+                    let _ = discord.send_message(message.channel_id,
+                            &HELP,
                             "",
                             false);
                 } else if message.content == "!quit"
