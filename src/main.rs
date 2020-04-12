@@ -1,3 +1,4 @@
+use discord::model::Channel;
 use discord::model::Event;
 use discord::model::UserId;
 use discord::Discord;
@@ -52,6 +53,15 @@ fn main() {
                 // Ignore the bot's own messages to prevent log pollution
                 if message.author.id == bot_id {
                     continue;
+                }
+
+                // Don't respond to any DMs or group chats
+                // (not that you can invite it to a group chat anyways)
+                let receipt_channel = discord.get_channel(message.channel_id)
+                    .expect("failed to get channel from channel ID");
+                match receipt_channel {
+                    Channel::Group(_) | Channel::Private(_) => continue,
+                    _ => (),
                 }
 
                 println!("[DEBUG] {} (user ID: {}) sent message: {}",
