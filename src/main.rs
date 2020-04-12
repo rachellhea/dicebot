@@ -110,7 +110,7 @@ fn get_admin_id() -> UserId {
     UserId(admin_id.parse::<u64>().unwrap())
 }
 
-const RULES: &'static str = "📝🎲 ***__Dice Rules__*** 🎲📝
+const RULES: &str = "📝🎲 ***__Dice Rules__*** 🎲📝
 
 **1. Highest > Lowest**
 The loser chooses between answering a truth or performing a dare. \
@@ -124,7 +124,7 @@ from each player while the 1000 will give a truth or dare to each player.
 If the same player loses two rounds in a row, both them and the \
 next lowest roll will take a truth or dare chosen by the two time loser.";
 
-const HELP: &'static str = "📝💁🏻‍♀️ ***__Command List__*** 💁🏻‍♀️📝
+const HELP: &str = "📝💁🏻‍♀️ ***__Command List__*** 💁🏻‍♀️📝
 
 `!random`/`!roll` - Roll a dice, from 0 to 1000!
 `!rules` - Display the rules of the dice game!
