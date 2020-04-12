@@ -4,6 +4,20 @@ use discord::Discord;
 use rand::Rng;
 use std::env;
 
+const RULES: &'static str = "📝🎲 ***__Dice Rules__*** 🎲📝
+
+**1. Highest > Lowest**
+The loser chooses between answering a truth or performing a dare. \
+The highest winner will then picks an appropriate task.
+
+**2. Minimum/Maximum Rolls**
+In the case of 0 or 1000 rolls, the 0 will take a truth or dare \
+from each player while the 1000 will give a truth or dare to each player.
+
+**3. Double Jeopardy**
+If the same player loses two rounds in a row, both them and the \
+next lowest roll will take a truth or dare chosen by the two time loser.";
+
 fn get_bot_id() -> UserId {
     let bot_id = &env::var("DISCORD_USER_ID").expect("Expected bot user ID");
 
@@ -48,6 +62,11 @@ fn main() {
                     println!("[INFO] {}", out);
                     let _ = discord.send_message(message.channel_id,
                             &out,
+                            "",
+                            false);
+                } else if message.content.starts_with("!rules") {
+                    let _ = discord.send_message(message.channel_id,
+                            &RULES,
                             "",
                             false);
                 } else if message.content == "!quit"
