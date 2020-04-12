@@ -1,0 +1,12 @@
+[package]
+name = "dicebot"
+version = "0.1.0"
+authors = ["Rachel Forshee <forsheej@amazon.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# discord 0.9.0 (openssl 1.1 fix) is not yet live on crates.io
+discord = { git = "https://github.com/SpaceManiac/discord-rs" }
+rand = "0.7.3"
