@@ -10,3 +10,5 @@ edition = "2018"
 # discord 0.9.0 (openssl 1.1 fix) is not yet live on crates.io
 discord = { git = "https://github.com/SpaceManiac/discord-rs" }
 rand = "0.7.3"
+log = "0.4.8"
+simplelog = "^0.7.4"
